@@ -23,3 +23,6 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
+      lxc-host:
+        underlay_cidr: '10.0.0.0/16'
+        overlay_cidr: '250.0.0.0/8'
