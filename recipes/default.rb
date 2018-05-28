@@ -37,11 +37,11 @@ template '/etc/default/lxd-profile' do
   owner 'root'
   group 'root'
   mode '0644'
-  variables content: YAML::dump(node[cookbook_name]['default_profile'])
+  variables content: YAML::dump(node[cookbook_name]['default_profile'].to_hash)
 end
 
 execute 'edit default profile' do
-  command 'cat /etc/default/lxd_profile | sudo lxc profile edit default'
+  command 'cat /etc/default/lxd-profile | sudo lxc profile edit default'
 end
 
 if node[cookbook_name]['sauron']['register']
