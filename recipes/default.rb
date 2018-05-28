@@ -37,7 +37,7 @@ template '/etc/default/lxd-profile' do
   owner 'root'
   group 'root'
   mode '0644'
-  variables content: YAML::dump(node[cookbook_name]['default_profile'].to_hash)
+  variables authorized_keys: node[cookbook_name]['authorized_keys'], bridge_name: node[cookbook_name]['bridge_name']
 end
 
 execute 'edit default profile' do

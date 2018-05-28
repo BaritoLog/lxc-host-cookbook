@@ -1,1 +1,19 @@
-<%= @content %>
+---
+config:
+  environment.http_proxy: ''
+  user.network_mode: ''
+  user.user-data: |
+    ssh_authorized_keys:
+    - <%= @authorized_keys %>
+description: Default LXD profile
+devices:
+  eth0:
+    name: eth0
+    nictype: bridged
+    parent: <%= @bridge_name %>
+    type: nic
+  root:
+    path: "/"
+    pool: default
+    type: disk
+name: default
