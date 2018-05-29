@@ -29,7 +29,7 @@ bash 'install lxd' do
 end
 
 execute 'setup lxd' do
-  command "lxd init --auto --network-address #{node['ipaddress']} --trust-password #{node[cookbook_name]['trust_password']}"
+  command "lxd init --auto --network-address 0.0.0.0 --trust-password #{node[cookbook_name]['trust_password']}"
 end
 
 template '/etc/default/lxd-profile' do
