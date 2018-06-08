@@ -25,6 +25,10 @@ template "/etc/network/interfaces.d/#{bridge_name}" do
   notifies :restart, "service[networking]", :immediately
 end
 
+sysctl 'vm.max_map_count' do
+  value 262144
+end
+
 apt_repository 'ubuntu-lxc' do
   uri 'ppa:ubuntu-lxc/lxc-stable'
 end
