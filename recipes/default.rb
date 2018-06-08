@@ -56,6 +56,11 @@ execute 'edit default profile' do
   command 'cat /etc/default/lxd-profile | sudo lxc profile edit default'
 end
 
+systemd_unit 'lxd.service' do
+  content node[cookbook_name]['lxd_systemd_unit']
+  action [:create, :restart]
+end
+
 if node[cookbook_name]['sauron']['register']
   http_request 'register host with sauron' do
     action :post
