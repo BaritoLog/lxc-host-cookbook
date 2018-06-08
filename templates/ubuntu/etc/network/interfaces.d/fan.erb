@@ -1,0 +1,3 @@
+iface <%= @fan_interface %> inet dhcp
+  up fanctl up <%= @overlay_cidr %> <%= @underlay_cidr %> dhcp
+  down fanctl down <%= @overlay_cidr %> <%= @underlay_cidr %>

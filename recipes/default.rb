@@ -12,9 +12,17 @@ underlay_cidr = node[cookbook_name]['underlay_cidr']
 overlay_cidr = node[cookbook_name]['overlay_cidr']
 bridge_name = node[cookbook_name]['bridge_name']
 
-execute 'setup fan network' do
-  command "sudo fanctl up -u #{underlay_cidr} -o #{overlay_cidr} --bridge=#{bridge_name} --dhcp"
-  not_if 'fanctl show | grep fan'
+service 'networking' do
+  action :nothing
+end
+
+template "/etc/network/interfaces.d/#{bridge_name}" do
+  source 'etc/network/interfaces.d/fan.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables fan_interface: node[cookbook_name]['fan_interface'], overlay_cidr: overlay_cidr, underlay_cidr: underlay_cidr
+  notifies :restart, "service[networking]", :immediately
 end
 
 apt_repository 'ubuntu-lxc' do

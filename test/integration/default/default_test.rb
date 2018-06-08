@@ -9,12 +9,16 @@ describe package('ubuntu-fan') do
   it { should be_installed }
 end
 
-describe bridge('fan-10') do
+describe file('/etc/network/interfaces.d/fan250') do
+  its('mode') { should cmp '0644' }
+end
+
+describe bridge('fan-250') do
   it { should exist }
 end
 
 describe command('fanctl show | grep fan') do
-  its('stdout') { should eq "fan-10           10.0.2.15/16         250.0.0.0/8          dhcp bridge=fan-10\n" }
+  its('stdout') { should eq "fan-250          10.0.2.15/16         250.0.0.0/8          dhcp\n" }
 end
 
 describe apt('ppa:ubuntu-lxc/lxc-stable') do
