@@ -16,7 +16,7 @@ service 'networking' do
   action :nothing
 end
 
-template "/etc/network/interfaces.d/#{bridge_name}" do
+template "/etc/network/interfaces.d/#{bridge_name.gsub('-', '')}.cfg" do
   source 'etc/network/interfaces.d/fan.erb'
   owner 'root'
   group 'root'
