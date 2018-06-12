@@ -21,7 +21,7 @@ template "/etc/network/interfaces.d/#{bridge_name.gsub('-', '')}.cfg" do
   owner 'root'
   group 'root'
   mode '0644'
-  variables fan_interface: node[cookbook_name]['fan_interface'], overlay_cidr: overlay_cidr, underlay_cidr: underlay_cidr
+  variables fan_interface: node[cookbook_name]['fan_interface'], overlay_cidr: overlay_cidr, underlay_cidr: underlay_cidr, bridge_name: bridge_name
   notifies :restart, "service[networking]", :immediately
 end
 
