@@ -21,7 +21,12 @@ template "/etc/network/interfaces.d/#{bridge_name.gsub('-', '')}.cfg" do
   owner 'root'
   group 'root'
   mode '0644'
-  variables fan_interface: node[cookbook_name]['fan_interface'], overlay_cidr: overlay_cidr, underlay_cidr: underlay_cidr, bridge_name: bridge_name
+  variables {
+    fan_interface: node[cookbook_name]['fan_interface'], 
+    overlay_cidr: overlay_cidr, 
+    underlay_cidr: underlay_cidr, 
+    bridge_name: bridge_name
+  }
   notifies :restart, "service[networking]", :immediately
 end
 
@@ -49,7 +54,10 @@ template '/etc/default/lxd-profile' do
   owner 'root'
   group 'root'
   mode '0644'
-  variables authorized_keys: node[cookbook_name]['authorized_keys'], bridge_name: node[cookbook_name]['bridge_name']
+  variables {
+    authorized_keys: node[cookbook_name]['authorized_keys'], 
+    bridge_name: node[cookbook_name]['bridge_name']
+  }
 end
 
 execute 'edit default profile' do
@@ -61,16 +69,4 @@ systemd_unit 'lxd.service' do
   action [:create, :restart]
 end
 
-if node[cookbook_name]['sauron']['register']
-  http_request 'register host with sauron' do
-    action :post
-    url node[cookbook_name]['sauron']['url']
-    message ({
-      hostname: node['hostname'], 
-      ipaddress: node['ipaddress']
-    }.to_json)
-    headers({
-      'Content-Type' => 'application/json'
-    })
-  end
-end
+include_recipe "#{cookbook_name}::sauron_register"
