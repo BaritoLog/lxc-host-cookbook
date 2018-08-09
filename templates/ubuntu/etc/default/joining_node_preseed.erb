@@ -10,7 +10,6 @@ networks:
     bridge.mtu: "1400"
     fan.underlay_subnet: <%= @underlay_subnet%>
     fan.overlay_subnet: <%= @overlay_subnet %>
-    raw.dnsmasq: port=0
 storage_pools:
 <% if @storage_pool_source %>
 - config:
