@@ -1,3 +1,0 @@
-iface <%= @fan_interface %> inet dhcp
-  up fanctl up -o <%= @overlay_cidr %> -u <%= @underlay_cidr %> --bridge=<%= @bridge_name %> --dhcp
-  down fanctl down -o <%= @overlay_cidr %> -u <%= @underlay_cidr %>
