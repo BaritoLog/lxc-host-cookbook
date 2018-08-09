@@ -18,11 +18,11 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[lxc-host::default]
+      - recipe[lxc-host::first_node]
     verifier:
       inspec_tests:
         - test/integration/default
     attributes:
       lxc-host:
-        underlay_cidr: '10.0.0.0/16'
-        overlay_cidr: '250.0.0.0/8'
+        underlay_subnet: '10.0.0.0/16'
+        overlay_subnet: '250.0.0.0/8'

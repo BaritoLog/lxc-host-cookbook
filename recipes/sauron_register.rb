@@ -11,7 +11,7 @@ if node[cookbook_name]['sauron']['register']
     action :post
     url node[cookbook_name]['sauron']['url']
     message ({
-      hostname: node['hostname'], 
+      hostname: node.name, 
       ipaddress: node['ipaddress']
     }.to_json)
     headers({
