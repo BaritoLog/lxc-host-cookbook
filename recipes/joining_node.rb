@@ -30,12 +30,8 @@ template '/etc/default/lxd_preseed.yml' do
             :lxd_cluster_address => node[cookbook_name][:lxd_cluster_address],
             :lxd_cluster_certificate => node[cookbook_name][:lxd_cluster_certificate],
             :lxd_cluster_password => node[cookbook_name][:lxd_cluster_password],
-            :network_bridge_name => node[cookbook_name][:network_bridge_name],
-            :underlay_subnet => node[cookbook_name][:underlay_subnet],
-            :overlay_subnet => node[cookbook_name][:overlay_subnet],
             :storage_pool_source => node[cookbook_name][:storage_pool_source],
             :storage_pool_name => node[cookbook_name][:storage_pool_name],
-            :storage_pool_driver => node[cookbook_name][:storage_pool_driver],
             :ssh_authorized_key => node[cookbook_name][:ssh_authorized_key])
 end
 
