@@ -8,6 +8,8 @@
 
 apt_update
 
+package 'zfsutils-linux'
+
 execute 'remove default lxd' do
   command "sudo apt-get purge lxd* -y"
 end
