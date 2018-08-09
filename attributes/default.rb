@@ -18,7 +18,7 @@ default[cookbook_name]['overlay_subnet'] = '250.0.0.0/8'
 # default[cookbook_name]['storage_pool_source'] =
 default[cookbook_name]['storage_pool_name'] = 'local'
 default[cookbook_name]['storage_pool_driver'] = 'dir'
-default[cookbook_name]['authorized_keys'] = ''
+default[cookbook_name]['ssh_authorized_key'] = ''
 
 default[cookbook_name]['lxd_systemd_unit'] = <<-EOU.gsub(/^\s+/, '')
   [Unit]
