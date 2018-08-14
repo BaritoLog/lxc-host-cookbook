@@ -35,10 +35,9 @@ execute "wait for LXD to be initialized" do
   command "sleep 10"
 end
 
-execute 'create preseed-finished.txt' do
-  command 'touch /var/snap/lxd/common/lxd/preseed-finished.txt'
-  mode '0755'
-  owner 'root'
+execute 'create preseed-finished' do
+  command 'touch /var/snap/lxd/common/lxd/preseed-finished'
+  user 'root'
   group 'root'
   action :nothing
 end
@@ -46,7 +45,7 @@ end
 execute 'lxd init' do
   not_if { ::File.exist?('/var/snap/lxd/common/lxd/preseed-finished') }
   command "cat /etc/default/lxd_preseed.yml | sudo lxd init --preseed"
-  notifies :run, 'execute[create preseed-finished.txt]', :immediately
+  notifies :run, 'execute[create preseed-finished]', :immediately
 end
 
 include_recipe "#{cookbook_name}::optimize"
